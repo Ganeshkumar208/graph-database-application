@@ -28,8 +28,8 @@ export function SkillsPage() {
     <div>
       <h2>Skills</h2>
       <div style={{ display: 'grid', gap: '1.75rem' }}>
-        {Array.from(byCategory.entries()).map(([category, list]) => (
-          <div key={category}>
+        {Array.from(byCategory.entries()).map(([category, list], groupIndex) => (
+          <div key={category} className="fade-item" style={{ ['--i' as any]: groupIndex }}>
             <div className="eyebrow">{category}</div>
             <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', marginTop: '0.5rem' }}>
               {list.map((s) => (

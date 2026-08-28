@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { api, GraphData } from '../api/client';
 import { NetworkGraph } from '../components/NetworkGraph';
+import { MiniGraph } from '../components/Bits';
 import { LoadingRows, ErrorState } from '../components/States';
 
 export function HomePage() {
@@ -78,14 +79,20 @@ export function HomePage() {
 
       <section style={{ paddingTop: '2.5rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
         <FeatureCard
+          index={0}
+          variant="discover"
           title="Find the skill, not just the person"
           body="Search a skill and see who has it directly, plus who's one collaboration away from it through a shared project."
         />
         <FeatureCard
+          index={1}
+          variant="chemistry"
           title="Staff a project with chemistry, not just qualifications"
           body="Team suggestions favor people who've already worked together, computed from the shape of the graph itself."
         />
         <FeatureCard
+          index={2}
+          variant="query"
           title="See the query, not just the result"
           body="Every network view can show you the exact parameterized Cypher that produced it."
         />
@@ -103,10 +110,21 @@ function Stat({ label, value }: { label: string; value: number }) {
   );
 }
 
-function FeatureCard({ title, body }: { title: string; body: string }) {
+function FeatureCard({
+  title,
+  body,
+  variant,
+  index,
+}: {
+  title: string;
+  body: string;
+  variant: 'discover' | 'chemistry' | 'query';
+  index: number;
+}) {
   return (
-    <div className="card">
-      <h3 style={{ fontSize: '1.05rem' }}>{title}</h3>
+    <div className="card fade-item" style={{ ['--i' as any]: index }}>
+      <MiniGraph variant={variant} />
+      <h3 style={{ fontSize: '1.05rem', marginTop: '0.75rem' }}>{title}</h3>
       <p style={{ fontSize: '0.9rem' }}>{body}</p>
     </div>
   );

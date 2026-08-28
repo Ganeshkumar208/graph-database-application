@@ -48,8 +48,8 @@ export function PeoplePage() {
       )}
       {people && people.length > 0 && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1rem' }}>
-          {people.map((p) => (
-            <Link key={p.id} to={`/people/${p.id}`} className="card" style={{ display: 'flex', gap: '0.9rem', textDecoration: 'none' }}>
+          {people.map((p, i) => (
+            <Link key={p.id} to={`/people/${p.id}`} className="card fade-item" style={{ ['--i' as any]: i, display: 'flex', gap: '0.9rem', textDecoration: 'none' }}>
               <Avatar name={p.name} color={p.avatarColor} />
               <div style={{ minWidth: 0 }}>
                 <div style={{ color: 'var(--parchment)', fontWeight: 600 }}>{p.name}</div>

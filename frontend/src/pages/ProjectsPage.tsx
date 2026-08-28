@@ -28,8 +28,8 @@ export function ProjectsPage() {
       {projects && projects.length === 0 && <EmptyState title="No projects yet." />}
       {projects && projects.length > 0 && (
         <div style={{ display: 'grid', gap: '0.9rem' }}>
-          {projects.map((p) => (
-            <Link key={p.project.id} to={`/projects/${p.project.id}`} className="card" style={{ textDecoration: 'none', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
+          {projects.map((p, i) => (
+            <Link key={p.project.id} to={`/projects/${p.project.id}`} className="card fade-item" style={{ ['--i' as any]: i, textDecoration: 'none', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
               <div>
                 <div style={{ color: 'var(--parchment)', fontWeight: 600 }}>{p.project.name}</div>
                 <div className="eyebrow">{p.project.domain}</div>
@@ -40,7 +40,10 @@ export function ProjectsPage() {
                 </div>
               </div>
               <div style={{ textAlign: 'right', fontSize: '0.85rem' }}>
-                <span style={{ color: STATUS_COLOR[p.project.status] ?? 'var(--parchment-dim)' }}>{p.project.status}</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: STATUS_COLOR[p.project.status] ?? 'var(--parchment-dim)' }}>
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'currentColor', display: 'inline-block' }} />
+                  {p.project.status}
+                </span>
                 <div style={{ color: 'var(--parchment-dim)' }}>{p.teamSize} on team</div>
               </div>
             </Link>
