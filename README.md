@@ -5,7 +5,7 @@ needed skill travels through an engineering org — even when the closest person
 it isn't the one you'd think to ask. Built on **CognoDB** (openCypher over Bolt)
 with a NestJS API and a React frontend.
 
-**Live demo:** _add your hosted URL here after deploying_
+**Live demo:** [graph-database-application-peach.vercel.app](https://graph-database-application-peach.vercel.app) (frontend) — backed by the API at [graph-database-application-21sx.onrender.com](https://graph-database-application-21sx.onrender.com)
 **Screen recording:** _add your recording link here_
 
 ---
@@ -128,13 +128,21 @@ exception filter in `backend/src/common/http-exception.filter.ts`).
 
 ### Deploying
 
-- **Backend**: any Node host with env vars (Render, Railway, Fly.io free
-  tiers all work). Set `NEO4J_URI`, `NEO4J_USERNAME`, `NEO4J_PASSWORD`,
-  `CORS_ORIGIN` (your deployed frontend URL).
-- **Frontend**: any static host (Vercel, Netlify). Set `VITE_API_URL` to your
-  deployed backend URL at build time.
+Deployed as two services (see live demo link above):
+
+- **Backend** on [Render](https://render.com): Node web service, root
+  directory `backend`, build command `npm install && npm run build`, start
+  command `npm start`, free instance. Env vars: `NEO4J_URI`,
+  `NEO4J_USERNAME`, `NEO4J_PASSWORD`, `CORS_ORIGIN` (set to the deployed
+  frontend URL).
+- **Frontend** on [Vercel](https://vercel.com): Vite preset, root directory
+  `frontend`. Env var: `VITE_API_URL` set to the deployed backend URL at
+  build time.
 - Keep the CognoDB instance running after deploying — the assignment asks
   for it to stay up in case of a live review.
+- Render's free instance spins down after inactivity, so the **first**
+  request after a period of idleness can take ~50s to respond while it
+  wakes back up — this is a free-tier limitation, not an app bug.
 
 ---
 
@@ -195,7 +203,7 @@ frontend/
     api/client.ts        typed fetch wrapper
     components/          NetworkGraph (d3-force), CypherPanel, shared states
     pages/                one page per route
-docs/                     (add data-model / screenshot images here)
+docs/                     screenshots referenced in section 8 below
 ```
 
 ## 7. Error handling
@@ -209,5 +217,38 @@ docs/                     (add data-model / screenshot images here)
 
 ## 8. Screenshots
 
-_Add screenshots of the home page, a person's network view, and the team
-suggestion panel here before submitting._
+**Home** — the use case pitch plus a live ego-network preview:
+
+![Home page](docs/home.png)
+
+**Person profile + network graph** — a junior engineer's direct skills/projects
+(gold) and colleagues reached through a shared project (teal):
+
+![Person network graph](docs/person-network.png)
+
+**Skill-in-network search** — the 2-hop "does a past collaborator have this
+skill?" query, populated:
+
+![Skill in network result](docs/skill-in-network.png)
+
+**Empty state** — the same search with no match, showing the app's empty-state
+handling rather than a blank screen:
+
+![Empty state](docs/empty-state.png)
+
+**People list filtered by skill**:
+
+![People filtered by skill](docs/people-filtered-by-skill.png)
+
+**Skills list** with per-skill expert counts:
+
+![Skills list](docs/skills.png)
+
+**Project detail + team suggestion** — ranks qualified candidates by prior
+collaboration:
+
+![Team suggestion](docs/team-suggestion.png)
+
+**Global search** across people, skills, and projects:
+
+![Search results](docs/search.png)
