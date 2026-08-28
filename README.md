@@ -6,7 +6,7 @@ it isn't the one you'd think to ask. Built on **CognoDB** (openCypher over Bolt)
 with a NestJS API and a React frontend.
 
 **Live demo:** [graph-database-application-peach.vercel.app](https://graph-database-application-peach.vercel.app) (frontend) — backed by the API at [graph-database-application-21sx.onrender.com](https://graph-database-application-21sx.onrender.com)
-**Screen recording:** _add your recording link here_
+**Screen recording:** [Watch on Google Drive](https://drive.google.com/file/d/119oj4djEZx9XfiFnxMVcNYcvIYn9AkSH/view?usp=drive_link)
 
 ---
 
